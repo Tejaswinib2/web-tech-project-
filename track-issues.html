@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Issues</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #0078d7;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        nav {
+            background: #005cbf;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #0078d7;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .issue {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 1.5rem 0;
+        }
+
+        .issue p {
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background: #0078d7;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Track Your Issues</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="report-issues.html">Report Issues</a></li>
+    </ul>
+</nav>
+
+<main>
+    <h2>Reported Issues</h2>
+
+    <div id="issues-list">
+        <!-- Issues will be dynamically displayed here -->
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Issue Management System. All Rights Reserved.</p>
+</footer>
+
+<script>
+    window.onload = function() {
+        const issues = JSON.parse(localStorage.getItem('issues')) || [];
+
+        if (issues.length === 0) {
+            document.getElementById('issues-list').innerHTML = '<p>No issues reported yet.</p>';
+            return;
+        }
+
+        const issuesList = document.getElementById('issues-list');
+        issues.forEach(issue => {
+            const issueDiv = document.createElement('div');
+            issueDiv.classList.add('issue');
+            issueDiv.innerHTML = `
+                <p><strong>Category:</strong> ${issue.category}</p>
+                <p><strong>Description:</strong> ${issue.description}</p>
+                <p><strong>Location:</strong> ${issue.location}</p>
+                <p><strong>Date:</strong> ${issue.date}</p>
+                <p><strong>Status:</strong> ${issue.status}</p>
+            `;
+            issuesList.appendChild(issueDiv);
+        });
+    };
+</script>
+
+</body>
+</html>
